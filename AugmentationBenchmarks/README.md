@@ -1,7 +1,7 @@
 # AugmentationBenchmarks
 Repo to contain the benchmarking script and results
 
-- First, describe the structure of this folder in the readme for example, what each folder contains. ALl the output files must go inside the Result folder.
+- First, describe the structure of this folder in the readme for example, what each folder contains. All the output files must go inside the Result folder. 
 
 - Second, list the dependencies required to run these benchmarks.
 
