@@ -1,8 +1,50 @@
-# AugmentationBenchmarks
-Repo to contain the benchmarking script and results
+# RA-DL-Phase1
 
-- First, describe the structure of this folder in the readme for example, what each folder contains. All the output files must go inside the Result folder. 
+## To enable mixup data augmentation, use 2 flags, --mixup True --alpha 0.2. Alpha is mixup interpolation coefficient (default: 1).
 
-- Second, list the dependencies required to run these benchmarks.
+### Examples:
 
-- Third, Describe how to run the benchmarks for example, how to run them for a specific algorithm and how to run them for all algorithms.
+#### CIFAR10
+
+ResNet-20 baseline on CIFAR10：
+    ```
+    python cifar.py --dataset cifar10 --arch resnet --depth 20
+    ```
+    
+ResNet-20 + Random Erasing on CIFAR10：
+    ```
+    python cifar.py --dataset cifar10 --arch resnet --depth 20 --p 0.5
+    ```
+
+wideResNet baseline on CIFAR10：
+    ```
+    python cifar.py --dataset cifar10 --arch wrn --depth 28 --widen-factor 10 
+    ```
+
+wideResNet + Random Erasing on CIFAR10：
+    ```
+    python cifar.py --dataset cifar10 --arch wrn --depth 28 --widen-factor --p 0.5
+    ```
+
+#### CIFAR100
+
+ResNet-20 baseline on CIFAR100：
+    ```
+    python cifar.py --dataset cifar100 --arch resnet --depth 20
+    ```
+    
+ResNet-20 + Random Erasing on CIFAR100：
+    ```
+    python cifar.py --dataset cifar100 --arch resnet --depth 20 --p 0.5
+    ```
+
+wideResNet baseline on CIFAR10：
+    ```
+    python cifar.py --dataset cifar100 --arch wrn --depth 28 --widen-factor 10 
+    ```
+
+wideResNet + Random Erasing on CIFAR10：
+    ```
+    python cifar.py --dataset cifar100 --arch wrn --depth 28 --widen-factor --p 0.5
+
+
