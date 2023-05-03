@@ -1,0 +1,2 @@
+Dataset,Neural network,Augmentation Algorithm,Epochs,Train acc,Test acc,Execution time (in secs)
+cifar10,resnet,No Augmentation,5,74.182,72.34,160.4748091697693
