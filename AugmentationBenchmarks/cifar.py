@@ -107,8 +107,12 @@ parser.add_argument('--n', default=10, type=int,
                     help='n value for RandAugment')
 parser.add_argument('--m', default=2, type=int, help='m value for RandAugment')
 
+# YOCO
+parser.add_argument('--yoco', default=False,
+                    type=bool, help='YOCO flag')
 args = parser.parse_args()
 state = {k: v for k, v in args._get_kwargs()}
+
 
 # Validate dataset
 assert args.dataset == 'cifar10' or args.dataset == 'cifar100', 'Dataset can only be cifar10 or cifar100.'
@@ -257,7 +261,10 @@ def main():
     print('Best acc:')
     print(best_acc)
 
-
+def YOCO(images, aug, h, w):
+    images = torch.cat((aug(images[:, :, :, 0:int(w/2)]), aug(images[:, :, :, int(w/2):w])), dim=3) if \
+    torch.rand(1) > 0.5 else torch.cat((aug(images[:, :, 0:int(h/2), :]), aug(images[:, :, int(h/2):h, :])), dim=2)
+    return images
 def train(trainloader, model, criterion, optimizer, epoch, use_cuda):
     # switch to train mode
     model.train()
@@ -317,6 +324,14 @@ def train(trainloader, model, criterion, optimizer, epoch, use_cuda):
                 # compute output
                 outputs = model(inputs)
                 loss = criterion(outputs, targets)
+        elif(args.yoco):
+            # print("running yoco")
+            aug = torch.nn.Sequential(transforms.RandomHorizontalFlip(), )
+            _, _, h, w = inputs.shape
+            # perform augmentations with YOCO
+            inputs = YOCO(inputs, aug, h, w)
+            outputs=model(inputs)
+            loss = criterion(outputs, torch.autograd.Variable(targets)) 
         else:
             inputs, targets = torch.autograd.Variable(
                 inputs), torch.autograd.Variable(targets)
@@ -440,6 +455,8 @@ def get_results_row(exec_time):
         result_Augmentation_Algorithm='Cutmix'
     elif(args.rand_augment):
         result_Augmentation_Algorithm='Random Augment'
+    elif(args.yoco):
+        result_Augmentation_Algorithm='YOCO'
     else:
         result_Augmentation_Algorithm = 'No Augmentation'
     result_Epochs = args.epochs
