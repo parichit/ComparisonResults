@@ -1,7 +1,7 @@
-# LabelImputationBenchmarks
+# LabelDenoisingBenchmarks
 Repo to contain the benchmarking script and results
 
-- First, describe the structure of this folder in the readme for example, what each folder contains. result folder is already created (put all output CSV files in this folder).
+- First, describe the structure of this folder in the readme for example, what each folder contains. result folder is already created - put all output CSV files inside the result folder.
 
 - Second, list the dependencies required to run these benchmarks.
 

@@ -1,0 +1,2 @@
+Dataset,Neural network,Labeling Algorithm,Epochs,Train acc,Test acc,Execution time (in secs)
+ModCloth,Resnet20,snorkel,1,0.8026321530342102,0.7440000176429749,108.15683507919312
